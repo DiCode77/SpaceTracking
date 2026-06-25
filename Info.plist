@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BuildMachineOSBuild</key>
+	<string>25F71</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>SpaceTracking</string>
+	<key>CFBundleIconFile</key>
+	<string>SpTracking.icns</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.dicode77.SpaceTracking</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleLongVersionString</key>
+	<string>SpaceTracking Version</string>
+	<key>CFBundleName</key>
+	<string>SpaceTracking</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>MacOSX</string>
+	</array>
+	<key>CSResourcesFileMapped</key>
+	<true/>
+	<key>CFBundleShortVersionString</key>
+	<string>@PROJECT_VERSION@</string>
+	<key>CFBundleVersion</key>
+	<string>@PROJECT_VERSION@</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>@APP_MIN_MACOS_VERS@</string>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+	<key>NSPrincipalClass</key>
+	<string>wxNSApplication</string>
+</dict>
+</plist>
