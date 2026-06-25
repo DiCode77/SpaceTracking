@@ -3,6 +3,15 @@ set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cm
 cmake_minimum_required(VERSION 3.25)
 project(SpaceTracking)
 project(${PROJECT_NAME} VERSION 0.0.1 LANGUAGES CXX)
+include(FetchContent)
+
+FetchContent_Declare(
+    MapKitCpp
+    GIT_REPOSITORY https://github.com/DiCode77/MapKitCpp.git
+    GIT_TAG main
+)
+
+FetchContent_MakeAvailable(MapKitCpp)
 
 set(SRC_FILES "${CMAKE_SOURCE_DIR}/src")
 set(SRC_FILES_GUI "${SRC_FILES}/gui")
@@ -32,6 +41,6 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 
 set_source_files_properties(${APP_RESOURCES} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 
-target_link_libraries(${PROJECT_NAME}  PRIVATE wx::core wx::base)
+target_link_libraries(${PROJECT_NAME}  PRIVATE wx::core wx::base MapKitCpp)
 
 target_sources(${PROJECT_NAME} PRIVATE ${APP_RESOURCES})
