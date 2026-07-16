@@ -8,7 +8,7 @@
 #include "main.hpp"
 
 bool MyApp::OnInit() {
-    SpTracking *prog = new SpTracking(wxT("Space Tracking"), wxDefaultPosition, wxSize(400, 500));
+    SpTracking *prog = new SpTracking(wxT("Space Tracking"), wxDefaultPosition, wxSize(1200, 800));
     prog->Show(true);
     return true;
 }
