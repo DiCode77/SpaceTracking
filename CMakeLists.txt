@@ -21,11 +21,13 @@ set(CMAKE_OSX_DEPLOYMENT_TARGET ${APP_MIN_MACOS_VERS})
 
 find_package(wxWidgets CONFIG REQUIRED)
 
+file(GLOB FILES_ON_SRC "${SRC_FILES}/constants.hpp") 
 file(GLOB_RECURSE LIST_FILES_GUI_WINDOWS "${SRC_FILES_GUI_WINDOW}/*.hpp" "${SRC_FILES_GUI_WINDOW}/*.cpp")
 file(GLOB_RECURSE APP_RESOURCES  "${CMAKE_SOURCE_DIR}/resources/*.icns")
 
-add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${LIST_FILES_GUI_WINDOWS})
+add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${FILES_ON_SRC} ${LIST_FILES_GUI_WINDOWS})
 
+source_group("src" FILES ${FILES_ON_SRC})
 source_group("src\\gui\\window" FILES ${LIST_FILES_GUI_WINDOWS})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES 
