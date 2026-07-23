@@ -1,0 +1,34 @@
+//
+//  ButtomPanel.hpp
+//  ButtomPanel
+//
+//  Created by DiCode77.
+//
+
+#ifndef ButtomPanel_hpp
+#define ButtomPanel_hpp
+
+#include <wx/wx.h>
+#include <utilites/utilites.hpp>
+#include <utilites/constants.hpp>
+
+class SpTracking;
+class ButtomPanel : public wxPanel{
+    SpTracking      *m_sp_tracking;
+    window::Property m_prop;
+    bool             m_is_init;
+private:
+    const wxSize m_size_main_window;
+public:
+    ButtomPanel() : m_sp_tracking(nullptr), m_is_init(false){}
+    ButtomPanel(SpTracking*, const wxWindowID&);
+    
+    bool init(SpTracking*, const wxWindowID&, const wxPoint&, const wxSize&);
+    bool is_init();
+public:
+    void OnEventMainUpdatedResize(wxSizeEvent&);
+private:
+    void OnSizePanelBottomMap(wxSizeEvent&);
+};
+
+#endif /* ButtomPanel_hpp */

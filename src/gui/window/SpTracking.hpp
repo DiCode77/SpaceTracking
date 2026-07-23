@@ -8,44 +8,28 @@
 #ifndef SpTracking_hpp
 #define SpTracking_hpp
 
-#include "constants.hpp"
-
-#include <iostream>
-#include <wx/wx.h>
-#include <MapKit.hpp>
+#include <gui/window/Includes.hpp>
 
 class SpTracking : public wxFrame{
     const wxSize m_size_main_frame;
 private:
-    wxPanel     *m_panel_map;
-    wxPanel     *m_panel_top_map;
-    wxPanel     *m_panel_left_map;
-    wxPanel     *m_panel_right_map;
-    wxPanel     *m_panel_bottom_map;
-    wxPanel     *m_panel_events_map;
-    
-    wxStaticBox *m_static_box_map;
-    wxStaticBox *m_static_box_buttom_map1;
-    wxStaticBox *m_static_box_buttom_map2;
-    wxStaticBox *m_static_box_buttom_map3;
-    wxStaticBox *m_static_box_buttom_map4;
-    
-    wxStaticBox *m_static_box_events_map1;
-    wxStaticBox *m_static_box_events_map2;
-    wxStaticBox *m_static_box_events_map3;
-
     MapKit      *m_map;
+    MapPanel    *m_map_panel;
+    TopPanel    *m_top_panel;
+    LeftPanel   *m_left_panel;
+    RightPanel  *m_right_panel;
+    ButtomPanel *m_buttom_panel;
 public:
     SpTracking(const wxString title, const wxPoint point, const wxSize size);
+public:
+    MapKit      *get_map();
+    MapPanel    *get_map_panel();
+    TopPanel    *get_top_panel();
+    LeftPanel   *get_left_panel();
+    RightPanel  *get_right_panel();
+    ButtomPanel *get_buttom_panel();
 private:
-    // 1 - updates size, 2 - oem size, 3 - user size, 4 - point size, set user point
-    std::pair<wxPoint, wxSize> GetNewProperty(const wxSize&, const wxSize&, const wxSize&, const wxPoint&, bool = true);
     void OnSizeMainFrame(wxSizeEvent&);
-    void OnSizePanelMap(wxSizeEvent&);
-    void OnSizePanelTopMap(wxSizeEvent&);
-    void OnSizePanelLeftMap(wxSizeEvent&);
-    void OnSizePanelRightMap(wxSizeEvent&);
-    void OnSizePanelBottomMap(wxSizeEvent&);
 };
 
 #endif /* SpTracking_hpp */
