@@ -17,8 +17,6 @@ class MapPanel : public wxPanel{
     SpTracking      *m_sp_tracking;
     window::Property m_prop;
     bool             m_is_init;
-private:
-    const wxSize m_size_main_window;
 public:
     MapPanel() : m_sp_tracking(nullptr), m_is_init(false){};
     MapPanel(SpTracking*, const wxWindowID&);

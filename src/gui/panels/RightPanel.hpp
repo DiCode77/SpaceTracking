@@ -17,8 +17,6 @@ class RightPanel : public wxPanel{
     SpTracking      *m_sp_tracking;
     window::Property m_prop;
     bool             m_is_init;
-private:
-    const wxSize m_size_main_window;
 public:
     RightPanel() : m_sp_tracking(nullptr), m_is_init(false){}
     RightPanel(SpTracking*, const wxWindowID&);

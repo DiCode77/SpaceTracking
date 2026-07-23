@@ -11,7 +11,11 @@
 #include <gui/window/Includes.hpp>
 
 class SpTracking : public wxFrame{
-    const wxSize m_size_main_frame;
+    struct window_size{
+        const wxSize  size;
+        const wxSize  client_size;
+        const wxPoint position;
+    } mw_size;;
 private:
     MapKit      *m_map;
     MapPanel    *m_map_panel;
@@ -20,7 +24,9 @@ private:
     RightPanel  *m_right_panel;
     ButtomPanel *m_buttom_panel;
 public:
-    SpTracking(const wxString title, const wxPoint point, const wxSize size);
+    SpTracking(const wxString &title, const wxPoint &point, const wxSize &size);
+public:
+    window_size &get_window_size();
 public:
     MapKit      *get_map();
     MapPanel    *get_map_panel();
