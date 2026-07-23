@@ -12,7 +12,9 @@ ButtomPanel::ButtomPanel(SpTracking *parent, const wxWindowID &winid) : ButtomPa
                                         wxSize(parent->get_top_panel()->GetSize().x, dy_but_panel),
                                         false);
     
-    this->init(parent, winid, this->m_prop.first, this->m_prop.second);
+    if (this->init(parent, winid, this->m_prop.first, this->m_prop.second)){
+        this->Bind(wxEVT_SIZE, &ButtomPanel::OnSizePanelBottomMap, this);
+    }
 }
 
 bool ButtomPanel::init(SpTracking *parent, const wxWindowID &winid, const wxPoint &point, const wxSize &size){

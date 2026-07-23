@@ -7,7 +7,9 @@ LeftPanel::LeftPanel(SpTracking *parent, const wxWindowID &winid) : LeftPanel::L
                                         wxPoint(parent->get_top_panel()->GetPosition().x, parent->get_map_panel()->GetPosition().y),
                                         wxSize((parent->get_map_panel()->GetPosition().x - parent->get_top_panel()->GetPosition().x) - window::LANDSLIDE_20, parent->get_map_panel()->GetSize().y),
                                         false);
-    this->init(parent, winid, this->m_prop.first, this->m_prop.second);
+    if (this->init(parent, winid, this->m_prop.first, this->m_prop.second)){
+        this->Bind(wxEVT_SIZE, &LeftPanel::OnSizePanelLeftMap, this);
+    }
 }
 
 bool LeftPanel::init(SpTracking *parent, const wxWindowID &winid, const wxPoint &point, const wxSize &size){

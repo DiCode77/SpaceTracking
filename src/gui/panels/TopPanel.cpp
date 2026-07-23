@@ -41,4 +41,5 @@ void TopPanel::OnEventMainUpdatedResize(wxSizeEvent &event){
     this->SetPosition(prop.first);
     this->SetSize(prop.second);
 }
+
 void TopPanel::OnSizePanelTopMap(wxSizeEvent &event){}

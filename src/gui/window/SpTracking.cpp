@@ -10,8 +10,8 @@
 SpTracking::SpTracking(const wxString &title, const wxPoint &point, const wxSize &size) : wxFrame(nullptr, wxID_ANY, title, point, size), mw_size(size, this->GetClientSize(), size - this->GetClientSize(), point){
     this->SetMinSize(size);
     
-    this->m_map_panel    = new MapPanel(this, wxID_ANY);
-   // this->m_map          = new MapKit(this->m_map_panel->GetHandle(), fPointDefault, fSizeDefault, fscale::fnone);
+    this->m_map_panel    = new MapPanel(this, wxID_ANY); const wxSize &&map_size_upd = this->get_map_panel()->get_static_box()->GetSize() - window::size_wx_20_20;
+    this->m_map          = new MapKit(this->get_map_panel()->get_static_box()->GetHandle(), window::fpoint_10_10, fsize(map_size_upd.x, map_size_upd.y), fscale::fauto);
     this->m_top_panel    = new TopPanel(this, wxID_ANY);
     this->m_left_panel   = new LeftPanel(this, wxID_ANY);
     this->m_right_panel  = new RightPanel(this, wxID_ANY);

@@ -11,7 +11,9 @@ RightPanel::RightPanel(SpTracking *parent, const wxWindowID &winid) : RightPanel
                                         wxPoint(dx_map_panel + window::LANDSLIDE_20, parent->get_map_panel()->GetPosition().y),
                                         wxSize(dx_top_panel - dx_map_panel - window::LANDSLIDE_20, parent->get_map_panel()->GetSize().y),
                                         false);
-    this->init(parent, winid, this->m_prop.first, this->m_prop.second);
+    if (this->init(parent, winid, this->m_prop.first, this->m_prop.second)){
+        this->Bind(wxEVT_SIZE, &RightPanel::OnSizePanelRightMap, this);
+    }
 }
 
 bool RightPanel::init(SpTracking *parent, const wxWindowID &winid, const wxPoint &point, const wxSize &size){
