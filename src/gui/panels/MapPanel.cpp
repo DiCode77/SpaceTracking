@@ -15,9 +15,19 @@ bool MapPanel::init(SpTracking *parent, const wxWindowID &winid, const wxPoint &
     return false;
 }
 
-bool MapPanel::is_init(){
+bool MapPanel::is_init() const{
     return this->m_is_init;
 }
 
-void MapPanel::OnEventMainUpdatedResize(wxSizeEvent&){}
+const MapPanel::Property &MapPanel::get_property() const{
+    return this->m_prop;
+}
+
+void MapPanel::OnEventMainUpdatedResize(wxSizeEvent &event){
+    const wxSize &&size = event.GetSize() - this->m_sp_tracking->get_window_size().part;
+    Property &&prop = Util::GetNewProperty(size, this->m_sp_tracking->get_window_size().client_size, this->get_property().first, this->get_property().second, false);
+    this->SetPosition(prop.first);
+    this->SetSize(prop.second);
+}
+
 void MapPanel::OnSizePanelMap(wxSizeEvent&){}

@@ -27,5 +27,22 @@ bool ButtomPanel::is_init(){
     return this->m_is_init;
 }
 
-void ButtomPanel::OnEventMainUpdatedResize(wxSizeEvent&){}
+SpTracking *ButtomPanel::get_sp_tracking(){
+    return this->m_sp_tracking;
+}
+
+const ButtomPanel::Property &ButtomPanel::get_property() const{
+    return this->m_prop;
+}
+
+void ButtomPanel::OnEventMainUpdatedResize(wxSizeEvent &event){
+    const wxSize &&size = event.GetSize() - this->m_sp_tracking->get_window_size().part;
+    const wxSize &&upd  = size - this->get_sp_tracking()->get_window_size().client_size;
+    Property &&prop = Util::GetNewProperty(wxSize(size.x, this->get_sp_tracking()->get_window_size().client_size.y),
+                                           this->get_sp_tracking()->get_window_size().client_size,
+                                           wxPoint(this->get_property().first.x, this->get_property().first.y + upd.y), this->get_property().second, false);
+    this->SetPosition(prop.first);
+    this->SetSize(prop.second);
+}
+
 void ButtomPanel::OnSizePanelBottomMap(wxSizeEvent&){}

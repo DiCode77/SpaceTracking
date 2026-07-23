@@ -14,6 +14,7 @@ class SpTracking : public wxFrame{
     struct window_size{
         const wxSize  size;
         const wxSize  client_size;
+        const wxSize  part;
         const wxPoint position;
     } mw_size;;
 private:

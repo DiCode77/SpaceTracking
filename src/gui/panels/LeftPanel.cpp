@@ -22,5 +22,20 @@ bool LeftPanel::is_init(){
     return this->m_is_init;
 }
 
-void LeftPanel::OnEventMainUpdatedResize(wxSizeEvent&){}
+SpTracking *LeftPanel::get_sp_tracking(){
+    return this->m_sp_tracking;
+}
+
+const LeftPanel::Property &LeftPanel::get_property() const{
+    return this->m_prop;
+}
+
+void LeftPanel::OnEventMainUpdatedResize(wxSizeEvent &event){
+    const wxSize &&size = event.GetSize() - this->m_sp_tracking->get_window_size().part;
+    Property &&prop = Util::GetNewProperty(wxSize(this->get_sp_tracking()->get_window_size().client_size.x, size.y),
+                                           this->get_sp_tracking()->get_window_size().client_size, this->get_property().first, this->get_property().second, false);
+    this->SetPosition(prop.first);
+    this->SetSize(prop.second);
+}
+
 void LeftPanel::OnSizePanelLeftMap(wxSizeEvent&){}

@@ -14,14 +14,19 @@
 
 class SpTracking;
 class MapPanel : public wxPanel{
-    SpTracking      *m_sp_tracking;
-    window::Property m_prop;
-    bool             m_is_init;
+public:
+    using Property = window::Property;
+private:
+    SpTracking *m_sp_tracking;
+    Property    m_prop;
+    bool        m_is_init;
 public:
     MapPanel() : m_sp_tracking(nullptr), m_is_init(false){};
     MapPanel(SpTracking*, const wxWindowID&);
     bool init(SpTracking*, const wxWindowID&, const wxPoint&, const wxSize&);
-    bool is_init();
+    bool is_init() const;
+    
+    const Property &get_property() const;
 public:
     void OnEventMainUpdatedResize(wxSizeEvent&);
 private:

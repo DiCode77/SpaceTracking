@@ -26,5 +26,21 @@ bool RightPanel::is_init(){
     return this->m_is_init;
 }
 
-void RightPanel::OnEventMainUpdatedResize(wxSizeEvent &event){}
+SpTracking *RightPanel::get_sp_tracking(){
+    return this->m_sp_tracking;
+}
+
+const RightPanel::Property &RightPanel::get_property() const{
+    return this->m_prop;
+}
+
+void RightPanel::OnEventMainUpdatedResize(wxSizeEvent &event){
+    const wxSize &&size = event.GetSize() - this->m_sp_tracking->get_window_size().part;
+    const wxSize &&upd  = size - this->get_sp_tracking()->get_window_size().client_size;
+    
+    Property &&prop = Util::GetNewProperty(wxSize(this->get_sp_tracking()->get_window_size().client_size.x, size.y),
+                                           this->get_sp_tracking()->get_window_size().client_size, wxPoint(this->get_property().first.x + upd.x, this->get_property().first.y), this->get_property().second, false);
+    this->SetPosition(prop.first);
+    this->SetSize(prop.second);
+}
 void RightPanel::OnSizePanelRightMap(wxSizeEvent &event){}

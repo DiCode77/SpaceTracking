@@ -14,6 +14,9 @@
 
 class SpTracking;
 class LeftPanel : public wxPanel{
+public:
+    using Property = window::Property;
+private:
     SpTracking      *m_sp_tracking;
     window::Property m_prop;
     bool             m_is_init;
@@ -23,6 +26,9 @@ public:
     
     bool init(SpTracking*, const wxWindowID&, const wxPoint&, const wxSize&);
     bool is_init();
+    
+    SpTracking *get_sp_tracking();
+    const Property &get_property() const;
 public:
     void OnEventMainUpdatedResize(wxSizeEvent&);
 private:
