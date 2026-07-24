@@ -11,6 +11,7 @@
 #include <wx/wx.h>
 #include <utilites/utilites.hpp>
 #include <utilites/constants.hpp>
+#include <wx/statbox.h>
 
 class SpTracking;
 class ButtomPanel : public wxPanel{
@@ -20,6 +21,11 @@ private:
     SpTracking      *m_sp_tracking;
     window::Property m_prop;
     bool             m_is_init;
+private:
+    wxStaticBox *m_static_box_a;
+    wxStaticBox *m_static_box_b;
+    wxStaticBox *m_static_box_c;
+    wxStaticBox *m_static_box_d;
 public:
     ButtomPanel() : m_sp_tracking(nullptr), m_is_init(false){}
     ButtomPanel(SpTracking*, const wxWindowID&);
