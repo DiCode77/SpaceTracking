@@ -15,14 +15,17 @@ ButtomPanel::ButtomPanel(SpTracking *parent, const wxWindowID &winid) : ButtomPa
     if (this->init(parent, winid, this->m_prop.first, this->m_prop.second)){
         this->Bind(wxEVT_SIZE, &ButtomPanel::OnSizePanelBottomMap, this);
         
-        const wxSize division = this->GetSize() / window::LANDSLIDE_5;
+        this->m_static_box_panel = new wxStaticBox(this, wxID_ANY, wxEmptyString, wxPoint(0, 0), this->GetSize());
+        this->m_static_box_panel->Bind(wxEVT_SIZE, &ButtomPanel::OnSizeStaticBoxPanel, this);
         
-        this->m_static_box_a = new wxStaticBox(this, wxID_ANY, wxEmptyString, window::point_wx_zero,           wxSize(division.x, this->GetSize().y));
-        this->m_static_box_b = new wxStaticBox(this, wxID_ANY, wxEmptyString, wxPoint((division.x)    + window::LANDSLIDE_10, 0),      wxSize(division.x, this->GetSize().y));
-        this->m_static_box_c = new wxStaticBox(this, wxID_ANY, wxEmptyString, wxPoint((division.x *2) + window::LANDSLIDE_20, 0), wxSize(division.x, this->GetSize().y));
+        const wxSize part = this->m_static_box_panel->GetSize() / window::LANDSLIDE_5;
         
-        const int size_st_end = (this->GetSize().x - ((this->m_static_box_c->GetPosition().x + division.x)  + window::LANDSLIDE_10));
-        this->m_static_box_d = new wxStaticBox(this, wxID_ANY, wxEmptyString, wxPoint((division.x *3) + window::LANDSLIDE_30, 0), wxSize(size_st_end, this->GetSize().y));
+        this->m_static_box_a = new wxStaticBox(this->m_static_box_panel, wxID_ANY, wxEmptyString, window::point_wx_zero,                          wxSize(part.x, this->GetSize().y));
+        this->m_static_box_b = new wxStaticBox(this->m_static_box_panel, wxID_ANY, wxEmptyString, wxPoint((part.x)    + window::LANDSLIDE_10, 0), wxSize(part.x, this->GetSize().y));
+        this->m_static_box_c = new wxStaticBox(this->m_static_box_panel, wxID_ANY, wxEmptyString, wxPoint((part.x *2) + window::LANDSLIDE_20, 0), wxSize(part.x, this->GetSize().y));
+        
+        const int size_st_end = (this->GetSize().x - ((this->m_static_box_c->GetPosition().x + part.x)  + window::LANDSLIDE_10));
+        this->m_static_box_d = new wxStaticBox(this->m_static_box_panel, wxID_ANY, wxEmptyString, wxPoint((part.x *3) + window::LANDSLIDE_30, 0), wxSize(size_st_end, this->m_static_box_panel->GetSize().y));
     }
 }
 
@@ -57,12 +60,18 @@ void ButtomPanel::OnEventMainUpdatedResize(wxSizeEvent &event){
 }
 
 void ButtomPanel::OnSizePanelBottomMap(wxSizeEvent &event){
-    const wxSize  division = event.GetSize() / window::LANDSLIDE_5;
+    this->m_static_box_panel->SetSize(event.GetSize());
+}
+
+void ButtomPanel::OnSizeStaticBoxPanel(wxSizeEvent &event){
+    const wxSize  part = event.GetSize() / window::LANDSLIDE_5;
     const wxSize  reset    = event.GetSize() - this->get_property().second;
     const wxPoint stay     = wxPoint(reset.x, 0);
     
+    this->m_static_box_panel->SetSize(event.GetSize());
+    
     this->m_static_box_a->SetPosition(wxPoint(stay.x / window::LANDSLIDE_5, stay.y));
-    this->m_static_box_b->SetPosition(wxPoint(((division.x)    + window::LANDSLIDE_10) + (stay.x / window::LANDSLIDE_5), stay.y));
-    this->m_static_box_c->SetPosition(wxPoint(((division.x *2) + window::LANDSLIDE_20) + (stay.x / window::LANDSLIDE_5), stay.y));
-    this->m_static_box_d->SetPosition(wxPoint(((division.x *3) + window::LANDSLIDE_30) + (stay.x / window::LANDSLIDE_5), stay.y));
+    this->m_static_box_b->SetPosition(wxPoint(((part.x)    + window::LANDSLIDE_10) + (stay.x / window::LANDSLIDE_5), stay.y));
+    this->m_static_box_c->SetPosition(wxPoint(((part.x *2) + window::LANDSLIDE_20) + (stay.x / window::LANDSLIDE_5), stay.y));
+    this->m_static_box_d->SetPosition(wxPoint(((part.x *3) + window::LANDSLIDE_30) + (stay.x / window::LANDSLIDE_5), stay.y));
 }

@@ -10,6 +10,7 @@
 
 #include "utilites/constants.hpp"
 #include <wx/wx.h>
+#include <wx/statbox.h>
 
 class SpTracking;
 class TopPanel : public wxPanel{
@@ -19,6 +20,8 @@ private:
     SpTracking      *m_sp_tracking;
     window::Property m_prop;
     bool             m_is_init;
+private:
+    wxStaticBox *m_static_box_panel;
 public:
     TopPanel() : m_is_init(false){};
     TopPanel(SpTracking*, const wxWindowID&);
@@ -31,6 +34,7 @@ public:
     void OnEventMainUpdatedResize(wxSizeEvent&);
 private:
     void OnSizePanelTopMap(wxSizeEvent&);
+    void OnSizeStaticBoxPanel(wxSizeEvent&);
 };
 
 #endif /* TopPanel_hpp */

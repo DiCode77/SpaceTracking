@@ -13,6 +13,9 @@ RightPanel::RightPanel(SpTracking *parent, const wxWindowID &winid) : RightPanel
                                         false);
     if (this->init(parent, winid, this->m_prop.first, this->m_prop.second)){
         this->Bind(wxEVT_SIZE, &RightPanel::OnSizePanelRightMap, this);
+        
+        this->m_static_box_panel = new wxStaticBox(this, wxID_ANY, wxEmptyString, wxPoint(0, 0), this->GetSize());
+        this->m_static_box_panel->Bind(wxEVT_SIZE, &RightPanel::OnSizeStaticBoxPanel, this);
     }
 }
 
@@ -45,4 +48,8 @@ void RightPanel::OnEventMainUpdatedResize(wxSizeEvent &event){
     this->SetPosition(prop.first);
     this->SetSize(prop.second);
 }
-void RightPanel::OnSizePanelRightMap(wxSizeEvent &event){}
+void RightPanel::OnSizePanelRightMap(wxSizeEvent &event){
+    this->m_static_box_panel->SetSize(event.GetSize());
+}
+
+void RightPanel::OnSizeStaticBoxPanel(wxSizeEvent &event){}

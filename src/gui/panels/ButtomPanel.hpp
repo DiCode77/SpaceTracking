@@ -22,6 +22,7 @@ private:
     window::Property m_prop;
     bool             m_is_init;
 private:
+    wxStaticBox *m_static_box_panel;
     wxStaticBox *m_static_box_a;
     wxStaticBox *m_static_box_b;
     wxStaticBox *m_static_box_c;
@@ -39,6 +40,7 @@ public:
     void OnEventMainUpdatedResize(wxSizeEvent&);
 private:
     void OnSizePanelBottomMap(wxSizeEvent&);
+    void OnSizeStaticBoxPanel(wxSizeEvent&);
 };
 
 #endif /* ButtomPanel_hpp */

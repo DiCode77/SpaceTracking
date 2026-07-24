@@ -9,6 +9,17 @@ LeftPanel::LeftPanel(SpTracking *parent, const wxWindowID &winid) : LeftPanel::L
                                         false);
     if (this->init(parent, winid, this->m_prop.first, this->m_prop.second)){
         this->Bind(wxEVT_SIZE, &LeftPanel::OnSizePanelLeftMap, this);
+        
+        this->m_static_box_panel = new wxStaticBox(this, wxID_ANY, wxEmptyString, wxPoint(0, 0), this->GetSize());
+        this->m_static_box_panel->Bind(wxEVT_SIZE, &LeftPanel::OnSizeStaticBoxPanel, this);
+        
+        const wxSize part = wxSize(this->GetSize().x, (this->GetSize().y -30) / 3);
+        
+        this->m_static_box_a = new wxStaticBox(this->m_static_box_panel, wxID_ANY, wxEmptyString, wxPoint(0, 0),               wxSize(this->m_static_box_panel->GetSize().x, part.y));
+        this->m_static_box_b = new wxStaticBox(this->m_static_box_panel, wxID_ANY, wxEmptyString, wxPoint(0, part.y +10),      wxSize(this->m_static_box_panel->GetSize().x, part.y));
+        
+        const int size_st_end = (this->m_static_box_panel->GetSize().y - ((this->m_static_box_b->GetPosition().y + part.y)  + window::LANDSLIDE_10));
+        this->m_static_box_c = new wxStaticBox(this->m_static_box_panel, wxID_ANY, wxEmptyString, wxPoint(0, (part.y *2) +20), wxSize(this->m_static_box_panel->GetSize().x, size_st_end));
     }
 }
 
@@ -40,4 +51,15 @@ void LeftPanel::OnEventMainUpdatedResize(wxSizeEvent &event){
     this->SetSize(prop.second);
 }
 
-void LeftPanel::OnSizePanelLeftMap(wxSizeEvent&){}
+void LeftPanel::OnSizePanelLeftMap(wxSizeEvent &event){
+    this->m_static_box_panel->SetSize(event.GetSize());
+}
+
+void LeftPanel::OnSizeStaticBoxPanel(wxSizeEvent &event){
+    const wxSize part = wxSize(this->m_static_box_panel->GetSize().x, (this->m_static_box_panel->GetSize().y -30) / 3);
+    const wxSize reset = event.GetSize() - this->get_property().second;
+
+    this->m_static_box_a->SetPosition(wxPoint(0, (reset.y /5)));
+    this->m_static_box_b->SetPosition(wxPoint(0, (part.y +10) + (reset.y /5)));
+    this->m_static_box_c->SetPosition(wxPoint(0, ((part.y *2) +20) + (reset.y /5) ));
+}

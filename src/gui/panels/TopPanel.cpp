@@ -11,6 +11,9 @@ TopPanel::TopPanel(SpTracking *parent, const wxWindowID &winid) : TopPanel::TopP
     
     if (this->init(parent, winid, this->m_prop.first, this->m_prop.second)){
         this->Bind(wxEVT_SIZE, &TopPanel::OnSizePanelTopMap, this);
+        
+        this->m_static_box_panel = new wxStaticBox(this, wxID_ANY, wxEmptyString, wxPoint(0, 0), this->GetSize());
+        this->m_static_box_panel->Bind(wxEVT_SIZE, &TopPanel::OnSizeStaticBoxPanel, this);
     }
 }
 
@@ -42,4 +45,10 @@ void TopPanel::OnEventMainUpdatedResize(wxSizeEvent &event){
     this->SetSize(prop.second);
 }
 
-void TopPanel::OnSizePanelTopMap(wxSizeEvent &event){}
+void TopPanel::OnSizePanelTopMap(wxSizeEvent &event){
+    this->m_static_box_panel->SetSize(event.GetSize());
+}
+
+void TopPanel::OnSizeStaticBoxPanel(wxSizeEvent &event){
+    
+}
